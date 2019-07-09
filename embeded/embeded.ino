@@ -30,7 +30,7 @@ const char* outTopic2 = "SOIL";
 const char* outTopic3 = "MoistureState";
 
 //intopic esp8266 mqtt input
-const char* inTopic1 = "DHT11interval";
+const char* inTopic1 = "interval";
 const char* inTopic2 = "PumpState";
 const char* inTopic3 = "MoistureThreshold";
 const char* inTopic4 = "WateringThreshold";
