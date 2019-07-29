@@ -23,6 +23,8 @@ int MEM_CS = A1;
 int S1 = A2; // S0, S3
 int S2 = A3; // S1, S2
 
+int enable = 1;
+
 void setup() {
 
   pinMode(OP_0, INPUT);
@@ -50,87 +52,139 @@ void setup() {
   pinMode(S1, OUTPUT);
   pinMode(S2, OUTPUT);
 
-  Serial.begin(9600);
+  pinMode(enable, OUTPUT);
+
+ // Serial.begin(9600);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   int temp0 =  digitalRead(OP_1);
   int temp1 =  digitalRead(OP_0);
+  int temp2 = digitalRead(enable);
   Serial.print(temp1);
   Serial.println(temp0);
+
+  if(temp2 == 1){
+    if((temp0 == 0) && (temp1 == 0)){ // ADDITION
+      //Serial.println("addition");
+      digitalWrite(MUX2to1_2to1_1, LOW);
+      digitalWrite(MUX2to1_2, LOW);
       
-  if((temp0 == 0) && (temp1 == 0)){ // ADDITION
-    Serial.println("addition");
-    digitalWrite(MUX2to1_2to1_1, LOW);
-    digitalWrite(MUX2to1_2, LOW);
-    
-    digitalWrite(RT_WE, HIGH);
-    digitalWrite(RT_OE, LOW);
-    digitalWrite(RT_CS, LOW);
-    
-    digitalWrite(RS_WE, HIGH);
-    digitalWrite(RS_OE, LOW);
-    digitalWrite(RS_CS, LOW);
-
-    digitalWrite(RD_WE, LOW);
-    digitalWrite(RD_OE, LOW);
-    digitalWrite(RD_CS, LOW);
-
-    digitalWrite(MEM_WE, LOW);
-    digitalWrite(MEM_OE, LOW);
-    digitalWrite(MEM_CS, HIGH);
-
-    digitalWrite(S1, HIGH);
-    digitalWrite(S2, LOW);
-  }else if((temp0 == 1) && (temp1 == 0)){ //SUBTRACTION
-
-    Serial.println("SUBTRACTION");
-    digitalWrite(MUX2to1_2to1_1, LOW);
-    digitalWrite(MUX2to1_2, LOW);
-    
-    digitalWrite(RT_WE, HIGH);
-    digitalWrite(RT_OE, LOW);
-    digitalWrite(RT_CS, LOW);
-    
-    digitalWrite(RS_WE, HIGH);
-    digitalWrite(RS_OE, LOW);
-    digitalWrite(RS_CS, LOW);
-
-    digitalWrite(RD_WE, LOW);
-    digitalWrite(RD_OE, LOW);
-    digitalWrite(RD_CS, LOW);
-
-    digitalWrite(MEM_WE, LOW);
-    digitalWrite(MEM_OE, LOW);
-    digitalWrite(MEM_CS, HIGH);
-
-    digitalWrite(S1, LOW);
-    digitalWrite(S2, HIGH);
-  }else if((temp0 == 0) && (temp1 == 1){ //store
-
-    Serial.println("store");
-    
-    digitalWrite(MUX2to1_2to1_1, HIGH);
-    digitalWrite(MUX2to1_2, HIGH);
-    
-    digitalWrite(RT_WE, HIGH);
-    digitalWrite(RT_OE, LOW);
-    digitalWrite(RT_CS, LOW);
-    
-    digitalWrite(RS_WE, HIGH);
-    digitalWrite(RS_OE, LOW);
-    digitalWrite(RS_CS, LOW);
-
-    digitalWrite(RD_WE, LOW);
-    digitalWrite(RD_OE, LOW);
-    digitalWrite(RD_CS, HIGH);
-
-    digitalWrite(MEM_WE, LOW);
-    digitalWrite(MEM_OE, LOW);
-    digitalWrite(MEM_CS, LOW);
-
-    digitalWrite(S1, HIGH);
-    digitalWrite(S2, LOW);
+      digitalWrite(RT_WE, HIGH);
+      digitalWrite(RT_OE, LOW);
+      digitalWrite(RT_CS, LOW);
+      
+      digitalWrite(RS_WE, HIGH);
+      digitalWrite(RS_OE, LOW);
+      digitalWrite(RS_CS, LOW);
+  
+      digitalWrite(RD_WE, LOW);
+      digitalWrite(RD_OE, LOW);
+      digitalWrite(RD_CS, LOW);
+  
+      digitalWrite(MEM_WE, LOW);
+      digitalWrite(MEM_OE, LOW);
+      digitalWrite(MEM_CS, HIGH);
+  
+      digitalWrite(S1, HIGH);
+      digitalWrite(S2, LOW);
+    }else if((temp0 == 1) && (temp1 == 0)){ //SUBTRACTION
+  
+      //Serial.println("SUBTRACTION");
+      digitalWrite(MUX2to1_2to1_1, LOW);
+      digitalWrite(MUX2to1_2, LOW);
+      
+      digitalWrite(RT_WE, HIGH);
+      digitalWrite(RT_OE, LOW);
+      digitalWrite(RT_CS, LOW);
+      
+      digitalWrite(RS_WE, HIGH);
+      digitalWrite(RS_OE, LOW);
+      digitalWrite(RS_CS, LOW);
+  
+      digitalWrite(RD_WE, LOW);
+      digitalWrite(RD_OE, LOW);
+      digitalWrite(RD_CS, LOW);
+  
+      digitalWrite(MEM_WE, LOW);
+      digitalWrite(MEM_OE, LOW);
+      digitalWrite(MEM_CS, HIGH);
+  
+      digitalWrite(S1, LOW);
+      digitalWrite(S2, HIGH);
+    }else if((temp0 == 0) && (temp1 == 1)){ //store
+  
+      //Serial.println("store");
+      
+      digitalWrite(MUX2to1_2to1_1, HIGH);
+      digitalWrite(MUX2to1_2, HIGH);
+      
+      digitalWrite(RT_WE, HIGH);
+      digitalWrite(RT_OE, LOW);
+      digitalWrite(RT_CS, LOW);
+      
+      digitalWrite(RS_WE, HIGH);
+      digitalWrite(RS_OE, LOW);
+      digitalWrite(RS_CS, LOW);
+  
+      digitalWrite(RD_WE, LOW);
+      digitalWrite(RD_OE, LOW);
+      digitalWrite(RD_CS, HIGH);
+  
+      digitalWrite(MEM_WE, LOW);
+      digitalWrite(MEM_OE, LOW);
+      digitalWrite(MEM_CS, LOW);
+  
+      digitalWrite(S1, HIGH);
+      digitalWrite(S2, LOW);
+    }else if((temp0 == 1) && (temp1 == 1)){ //load
+  
+      //Serial.println("LOAD");
+      
+      digitalWrite(MUX2to1_2to1_1, HIGH);
+      digitalWrite(MUX2to1_2, HIGH);
+      
+      digitalWrite(RT_WE, HIGH);
+      digitalWrite(RT_OE, LOW);
+      digitalWrite(RT_CS, LOW);
+      
+      digitalWrite(RS_WE, HIGH);
+      digitalWrite(RS_OE, LOW);
+      digitalWrite(RS_CS, LOW);
+  
+      digitalWrite(RD_WE, LOW);
+      digitalWrite(RD_OE, LOW);
+      digitalWrite(RD_CS, LOW);
+  
+      digitalWrite(MEM_WE, HIGH);
+      digitalWrite(MEM_OE, LOW);
+      digitalWrite(MEM_CS, LOW);
+  
+      digitalWrite(S1, HIGH);
+      digitalWrite(S2, LOW);
+    }
+  }else{
+      digitalWrite(MUX2to1_2to1_1, LOW);
+      digitalWrite(MUX2to1_2, LOW);
+      
+      digitalWrite(RT_WE, LOW);
+      digitalWrite(RT_OE, LOW);
+      digitalWrite(RT_CS, LOW);
+      
+      digitalWrite(RS_WE, LOW);
+      digitalWrite(RS_OE, LOW);
+      digitalWrite(RS_CS, LOW);
+  
+      digitalWrite(RD_WE, LOW);
+      digitalWrite(RD_OE, LOW);
+      digitalWrite(RD_CS, LOW);
+  
+      digitalWrite(MEM_WE, LOW);
+      digitalWrite(MEM_OE, LOW);
+      digitalWrite(MEM_CS, LOW);
+  
+      digitalWrite(S1, HIGH);
+      digitalWrite(S2, LOW);
   }
 }
