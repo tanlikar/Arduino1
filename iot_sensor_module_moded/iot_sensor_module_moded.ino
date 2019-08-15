@@ -48,7 +48,7 @@ uint32_t getAbsoluteHumidity(float temperature, float humidity) {
 
 const char* ssid = "tan";
 const char* password = "123456789";
-const char* mqtt_server = "broker.hivemq.com";
+const char* mqtt_server = "192.168.137.158";
 const char* clientID = "NodeMCUDevKit";
 
 //outtopic esp8266 mqtt output

@@ -173,8 +173,8 @@ void loop() {
    if(currentMillis - previousMillis >= interval) {
      previousMillis = currentMillis;   
      AnalogInput = analogRead(SOIL);
-     //Serial.print(AnalogInput);
-     AnalogInput = map(AnalogInput,1024,398,0,100); //range need to change
+     Serial.print(AnalogInput);
+     AnalogInput = map(AnalogInput,550,100,0,100); //range need to change
      Serial.print("MOisture reading: ");
      Serial.println(AnalogInput);
      Serial.print("MOisture Threshold reading: ");
