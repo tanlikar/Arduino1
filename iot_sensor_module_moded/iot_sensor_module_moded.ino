@@ -332,12 +332,12 @@ void loop() {
      getTempHumiReading();
      getSgp30Reading();
      GetCO2PPM();
-     counter = counter + 1;
+//     counter = counter + 1;
 
-     if(counter == 7200){
-      sgp30SetBase();
-      counter = 0;
-     }
+//     if(counter == 7200){
+//      sgp30SetBase();
+//      counter = 0;
+//     }
   }
     if(PM25.loop()){
     mPM25 = PM25.get();
