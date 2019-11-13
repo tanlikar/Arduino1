@@ -5,15 +5,15 @@ DaikinIRESP8266 daikin = DaikinIRESP8266(4);
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  temp.begin();
+  daikin.begin();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  temp.setPower(true);
-  temp.setTemp(25);
-  temp.setFan(MAX);
-  temp.setSwingAuto(true);
-  temp.sendComm();
+  daikin.setPower(true);
+  daikin.setTemp(25);
+  daikin.setFan(MAX);
+  daikin.setSwingAuto(true);
+  daikin.sendComm();
   delay(3000);
 }
