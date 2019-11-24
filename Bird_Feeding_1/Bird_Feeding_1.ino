@@ -25,7 +25,14 @@ LiquidCrystal lcd(A0, A1, A2, 11, 12, 13); // Creates an LC object. Parameters: 
  
 boolean feed = true; // condition for alarm
  char key;
- int r[6];
+ int temp[6];
+ int time1[6];
+ int time2[6];
+ int time3[6];
+
+//varaible for non blocking delay
+ unsigned long previousMillis = 0; 
+ const long interval = 5000;   
  
  void setup() 
  { 
@@ -65,15 +72,21 @@ if (buttonPress==1)
  lcd.print("Date: ");
  lcd.print(rtc.getDateStr());
  
- if (t1==r[0] && t2==r[1] && t3==r[2] && t4==r[3]&& t5<1 && t6<3 && feed==true)
+ if ((t1==time1[0] && t2==time1[1] && t3==time1[2] && t4==time1[3]&& t5<1 && t6<3)|| (t1==time2[0] && t2==time2[1] && t3==time2[2] && t4==time2[3]&& t5<1 && t6<3) || (t1==time3[0] && t2==time3[1] && t3==time3[2] && t4==time3[3]&& t5<1 && t6<3) )
  { 
     digitalWrite(1, HIGH);
     digitalWrite(0, LOW);
-    delay(5000);
-    digitalWrite(1, LOW);
-    digitalWrite(0, LOW);
-    feed=false; 
  } 
+
+//non blocking delay
+unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval) {
+
+     previousMillis = currentMillis;
+     digitalWrite(1, LOW);
+     digitalWrite(0, LOW);
+   }
+ 
  }       
 void setFeedingTime()
 {
@@ -97,7 +110,7 @@ void setFeedingTime()
     
     lcd.print(key);
     
-    r[i] = key-48;
+    temp[i] = key-48;
     i++;
     j++;
     if (j==2)
@@ -107,6 +120,32 @@ void setFeedingTime()
     delay(500);
   }
   if (key == 'D')
-  {key=0; j=0; break;}
+  {
+    for(int x = 0; x<6; x++){
+      time1[x] = temp[x];
+    }
+    key=0;
+    j=0;
+    break;
+    }
+   if (key == 'C')
+  {
+    for(int x = 0; x<6; x++){
+      time2[x] = temp[x];
+    }
+    key=0;
+    j=0;
+    break;
+    }
+   if (key == 'B')
+  {
+    for(int x = 0; x<6; x++){
+      time3[x] = temp[x];
+    }
+    key=0;
+    j=0;
+    break;
+    }
+   
   }
 }
