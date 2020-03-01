@@ -12,8 +12,10 @@ Serial.begin(115200);
 
 Wire.begin(D2, D1);
 lcd.begin();
+lcd.backlight();
 lcd.home();
-lcd.print("Hello, NodeMCsdfzdfzxdfzsdfsdfasdfasdfasdfU");
+lcd.setCursor(2,1);
+lcd.print("Hello, ");
 
 }
 
