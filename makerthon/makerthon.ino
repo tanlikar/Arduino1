@@ -71,6 +71,8 @@ void ICACHE_RAM_ATTR item1Select() {
  lcd.clear();
  lcd.home();
  lcd.print("Item1 Selected");
+ lcd.setCursor(0, 1);
+ lcd.print("Pay: 400");
 }
 
 void ICACHE_RAM_ATTR item2Select() {
@@ -81,6 +83,8 @@ void ICACHE_RAM_ATTR item2Select() {
  lcd.clear();
  lcd.home();
  lcd.print("Item2 Selected");
+ lcd.setCursor(0, 1);
+ lcd.print("Pay: 500");
 }
 
 //TODO add motor run
